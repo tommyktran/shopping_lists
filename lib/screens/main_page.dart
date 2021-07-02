@@ -40,8 +40,10 @@ class MainPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: Provider.of<ListData>(context, listen: true).shoppingLists,
+        child: Consumer<ListData>(
+          builder: (context, listData, child) {
+            return Column(children: listData.shoppingLists);
+          },
         ),
       ),
     );

@@ -4,16 +4,21 @@ import 'package:shopping_list/models/list_data.dart';
 import 'package:shopping_list/widgets/ShoppingList.dart';
 import 'package:provider/provider.dart';
 
-class AddListScreen extends StatefulWidget {
+class EditListScreen extends StatefulWidget {
+  ShoppingList thisShoppingList;
+
+  EditListScreen({required this.thisShoppingList});
+
   @override
-  _AddListScreenState createState() => _AddListScreenState();
+  _EditListScreenState createState() => _EditListScreenState();
 }
 
-class _AddListScreenState extends State<AddListScreen> {
+class _EditListScreenState extends State<EditListScreen> {
   @override
   Widget build(BuildContext context) {
     String newListName = '';
     String newListPriority = '';
+
 
     return Container(
       color: Color(0xff757575),
@@ -30,7 +35,7 @@ class _AddListScreenState extends State<AddListScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              'Add Shopping List',
+              'Edit Shopping List',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 27.0,
@@ -52,7 +57,7 @@ class _AddListScreenState extends State<AddListScreen> {
             SizedBox(height: 10.0),
             FlatButton(
               child: Text(
-                'Add',
+                'Edit',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -61,11 +66,7 @@ class _AddListScreenState extends State<AddListScreen> {
               onPressed: () {
                 print(newListName);
                 print(newListPriority);
-                Provider.of<ListData>(context, listen: false)
-                    .addShoppingList(ShoppingList(
-                  name: newListName,
-                  priority: newListPriority
-                ));
+                Provider.of<ListData>(context, listen: false).editShoppingList(widget.thisShoppingList, newListName, newListPriority);
                 Navigator.pop(context);
               },
             ),

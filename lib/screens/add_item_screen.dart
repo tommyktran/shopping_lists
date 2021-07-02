@@ -24,7 +24,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
     return Container(
       color: Color(0xff757575),
       child: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -82,7 +82,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 //       .shoppingLists
                 //       .length-1,
                 // ));
-                Provider.of<ListData>(context, listen: false).addListItem(ListItem(
+                Provider.of<ListData>(context, listen: false).addListItemToList(Provider.of<ListData>(context, listen: false).shoppingLists[Provider.of<ListData>(context, listen: false).currentShoppingListIndex],
+                    ListItem(
                   itemName: newItemName,
                   itemQuantity: newItemQuantity,
                   itemNote: newItemNote
